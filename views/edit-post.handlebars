@@ -1,0 +1,43 @@
+<!-- Edit Post Section -->
+<article>
+  <!-- Return to Dashboard Link -->
+  <a href="/dashboard"> &larr; Return To Dashboard</a>
+
+  <h2>Edit Post</h2>
+  
+  <!-- Edit Post Form -->
+  <form class="edit-post-form">
+    <div>
+      <label for="post-title">Title</label>
+      <input id="post-title" name="post-title" type="text" size="70" value="{{post.title}}" required />
+    </div>
+    <div>
+      <label for="post-text">Content</label>
+      <textarea id="post-text" name="post-text" type="text" required>{{post.post_content}}</textarea>
+    </div>
+    <div>
+      <button type="submit">Save Post</button>
+      <button type="button" class="delete-post-btn">Delete Post</button>
+    </div>
+  </form>
+</article>
+
+<!-- Add Comment Section -->
+<form class="comment-form">
+  <div>
+    <label for="comment-body">Add a comment</label>
+    <textarea id="comment-body" name="comment-body" required></textarea>
+  </div>
+
+  <div>
+    <button type="submit">Add Comment</button>
+  </div>
+</form>
+
+<!-- Comments Section -->
+{{> comments post.comments}}
+
+<!-- JavaScript Files -->
+<script src="/javascript/edit-post.js"></script>
+<script src="/javascript/delete-post.js"></script>
+<script src="/javascript/comment.js"></script>

@@ -1,0 +1,44 @@
+<!-- Check if there are any posts -->
+{{#if posts.length}}
+  <!-- User Blogs Section -->
+  <section>
+    <h2>Your Posts</h2>
+    <ol>
+      {{#each posts as |post|}}
+        <li>
+          <article class="post">
+            <!-- Post title and link -->
+            <div class="title">
+              <a href="/post/{{post.id}}">{{post.title}}</a>
+            </div>
+            <!-- Post metadata -->
+            <div class="meta">
+              <strong>Posted by {{post.user.username}} on {{format_date post.created_at}}</strong>
+            </div>
+          </article>
+          <!-- Edit Post Link -->
+          <a href="/dashboard/edit/{{post.id}}" class="edit-link">Edit post</a>
+        </li>
+      {{/each}}
+    </ol>
+  </section>
+{{/if}}
+
+<!-- Create New Blog Section -->
+<section>
+  <h2>Create New Blog</h2>
+  <form class="new-post-form">
+    <div>
+      <label for="post-title">Title</label>
+      <input type="text" id="post-title" name="post-title" required />
+    </div>
+    <div>
+      <label for="blog_content">Blog</label>
+      <textarea class="" id="blog_content" name="blog_content" required></textarea>
+    </div>
+    <button type="submit" class="btn">Create</button>
+  </form>
+</section>
+
+<!-- JavaScript for Adding Post -->
+<script src="/javascript/add-post.js"></script>
