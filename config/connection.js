@@ -1,19 +1,21 @@
+// Import required modules
 const Sequelize = require('sequelize');
 require('dotenv').config();
 
-const { DB_NAME, DB_USER, DB_PW, JAWSDB_URL } = process.env;
+let sequelize;
 
-const sequelize = JAWSDB_URL
-  ? new Sequelize(JAWSDB_URL)
-  : new Sequelize(DB_NAME, DB_USER, DB_PW, {
-      host: '127.0.0.1',
-      dialect: 'mysql',
-      port: 3306,
-    });
+// Check if the app is running on JAWSDB (usually in production)
+// If so, use JAWSDB_URL for the database connection
+if (process.env.JAWSDB_URL) {
+  sequelize = new Sequelize(process.env.JAWSDB_URL);
+} else {
+  // If not on JAWSDB, connect to the local MySQL database using environment variables
+  sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PW, {
+    host: '127.0.0.1',
+    dialect: 'mysql',
+    port: 3306
+  });
+}
 
-sequelize
-  .authenticate()
-  .then(() => console.log('Database connected...'))
-  .catch((err) => console.error('Unable to connect to the database:', err));
-
+// Export the sequelize instance for use in other modules
 module.exports = sequelize;

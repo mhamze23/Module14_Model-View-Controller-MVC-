@@ -1,0 +1,26 @@
+<!-- Include post-info partial -->
+{{> post-info post}}
+
+<!-- Displaying form and comments -->
+<!-- Only display the comment form if the user is logged in -->
+{{#if loggedIn}}
+  <!-- Add Comment Form -->
+  <form class="comment-form">
+    <div>
+      <label for="comment-body">Add a comment:</label>
+      <textarea id="comment-body" name="comment-body" required></textarea>
+    </div>
+
+    <div>
+      <button type="submit">Add Comment</button>
+    </div>
+  </form>
+{{/if}}
+
+<!-- Include comments partial -->
+{{> comments post.comments}}
+
+<!-- Only include the comment JavaScript if the user is logged in -->
+{{#if loggedIn}}
+  <script src="/js/comment.js"></script>
+{{/if}}

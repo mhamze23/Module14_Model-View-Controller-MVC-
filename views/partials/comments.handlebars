@@ -1,0 +1,17 @@
+<!-- Comments Wrapper -->
+<div class="comments">
+  <!-- Iterate through comments array -->
+  {{#each this}}
+    <!-- Single Comment Section -->
+    <section class="comment">
+      <!-- Comment Metadata -->
+      <div class="meta">
+        {{user.username}} on {{format_date created_at}}
+      </div>
+      <!-- Comment Text -->
+      <div class="text">
+        {{comment_text}}
+      </div>
+    </section>
+  {{/each}}
+</div>

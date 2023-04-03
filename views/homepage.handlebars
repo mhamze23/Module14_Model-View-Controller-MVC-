@@ -1,0 +1,10 @@
+<!-- Posts List -->
+<ol class="post-list">
+  <!-- Iterate through the posts array -->
+  {{#each posts as |post|}}
+    <li>
+      <!-- Include post-info partial for each post -->
+      {{> post-info post }}
+    </li>
+  {{/each}}
+</ol>

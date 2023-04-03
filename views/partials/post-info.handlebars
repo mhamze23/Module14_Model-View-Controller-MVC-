@@ -1,0 +1,15 @@
+<!-- Post Article -->
+<article class="post">
+  <!-- Post Title -->
+  <div class="title">
+    <a href="/post/{{id}}" target="_blank">{{title}}</a>
+  </div>
+  <!-- Post Author and Date -->
+  <div class="meta">
+    Posted by {{user.username}} on {{format_date created_at}}
+  </div>
+  <!-- Post Content -->
+  <div class="content">
+    <p>{{ blog_post }}</p>
+  </div>
+</article>
