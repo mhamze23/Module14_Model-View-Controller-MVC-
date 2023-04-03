@@ -124,3 +124,4 @@ router.delete('/:id', withAuth, async (req, res) => {
 });
 
 // Export the configured
+module.exports = router;
