@@ -1,33 +1,30 @@
-// Function to handle the submission of the new post form
-async function newFormHandler(event) {
-    // Prevent default form submission behavior
-    event.preventDefault();
-  
-    // Get the title and blog post from the form
-    const title = document.querySelector('input[name="post-title"]').value;
-    const blog_post = document.querySelector('input[name="blog_post"]').value;
-  
-    // Send a POST request to the API to create a new post
-    const response = await fetch(`/api/posts`, {
+// Async function to handle new post creation
+const handleNewPost = async (event) => {
+  // Prevent default form submission behavior
+  event.preventDefault();
+
+  // Get values from form inputs
+  const postTitle = document.querySelector('input[name="new-post-title"]').value.trim();
+  const postDescription = document.querySelector('textarea[name="new-post-description"]').value.trim();
+
+  // Check if title and description fields are filled
+  if (postTitle && postDescription) {
+      // Make a POST request to the server
+      const response = await fetch('/api/posts/', {
       method: 'POST',
-      body: JSON.stringify({
-        title,
-        blog_post
-      }),
-      headers: {
-        'Content-Type': 'application/json'
+      body: JSON.stringify({ title: postTitle, description: postDescription }),
+      headers: { 'Content-Type': 'application/json' },
+      });
+
+      // If request was successful, redirect to dashboard
+      if (response.ok) {
+          document.location.replace('/dashboard');
+      } else {
+      // Alert the user in case of error
+      alert('Error occurred. Please try again!');
       }
-    });
-  
-    // If the response is successful, redirect to the dashboard
-    if (response.ok) {
-      document.location.replace('/dashboard');
-    } else {
-      // If there's an error, show an alert with the status text
-      alert(response.statusText);
-    }
   }
-  
-  // Add an event listener to the new post form for the submit event
-  document.querySelector('.new-post-form').addEventListener('submit', newFormHandler);
-  
+};
+
+// Attach event listener to the form submission
+document.querySelector('.create-blog-form').addEventListener('submit', handleNewPost);

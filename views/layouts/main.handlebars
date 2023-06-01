@@ -2,43 +2,60 @@
 <html lang="en">
 
 <head>
+  <!-- Meta information -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tech Blog</title>
-  <link rel="stylesheet" href="/stylesheets/style.css">
+
+  <!-- Page title -->
+  <title>The Developer's Den</title>
+
+  <!-- External CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+
+  <!-- Internal CSS -->
+  <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
-  <div class="wrapper">
-    <!-- Header -->
-    <header>
-      <nav>
-        <h1>
-          <a href="/">The Tech Blog</a>
-        </h1>
-        {{#if loggedIn}}
-          <a href="/">Home</a>
-          <a href="/dashboard">Dashboard</a>
-          <a href="/" id="logout">Logout</a>
-        {{else}}
-          <a href="/">Home</a>
-          <a href="/login">Login</a>
-          <a href="/signup">Sign Up</a>
-        {{/if}}
-      </nav>
-    </header>
-    <!-- Main content -->
-    <main>
-      {{{ body }}}
-    </main>
-    <!-- Footer -->
-    <footer>
-      &copy; The Tech Blog
-    </footer>
-  </div>
+  <header class="level has-background-info-dark p-5">
+    <!-- Site title -->
+    <h1 class="level-left is-size-2 has-text-weight-semibold has-text-white">The Developer's Den</h1>
 
+    <!-- Navigation bar -->
+    <nav class="level-right nav-bar">
+      <ul class="level">
+        <!-- Home button -->
+        <li class="level-item">
+          <a href="/" class="button is-white nav-btn is-outlined" id="nav-home">Home</a>
+        </li>
+
+        <!-- Dashboard button -->
+        <li class="level-item">
+          <a href="/dashboard" class="button is-white nav-btn is-outlined" id="nav-dashboard">Dashboard</a>
+        </li>
+
+        <!-- User-specific buttons -->
+        {{#if loggedIn}}
+        <li class="level-item">
+          <button class="button is-white nav-btn is-outlined" id="logout-btn">Logout</button>
+        </li>
+        {{else}}
+        <li class="level-item">
+          <a href="/login" class="button is-white nav-btn is-outlined" id="nav-login">Login</a>
+        </li>
+        {{/if}}
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Main content -->
+  <main class="p-5">
+    {{{body}}}
+  </main>
+
+  <!-- Logout functionality if user is logged in -->
   {{#if loggedIn}}
-    <script src="/javascript/logout.js"></script>
+  <script src="/js/logout.js"></script>
   {{/if}}
 </body>
 

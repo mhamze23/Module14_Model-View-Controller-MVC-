@@ -1,10 +1,24 @@
-<!-- Posts List -->
-<ol class="post-list">
-  <!-- Iterate through the posts array -->
-  {{#each posts as |post|}}
-    <li>
-      <!-- Include post-info partial for each post -->
-      {{> post-info post }}
-    </li>
-  {{/each}}
-</ol>
+<div>
+    <h2 class="is-size-2">All Posts:</h2>
+</div>
+<div>
+    <!-- Iterating over each post -->
+    {{#each posts as |post|}}
+        <section class="card p-4">
+            <!-- Linking to the specific post details page -->
+            <a href="/posts/{{post.id}}">
+                <div class="level">
+                    <!-- Displaying the post title -->
+                    <div class="level-left">
+                        <header>{{post.title}}</header>
+                    </div>
+                    <div class="level-right">
+                        <!-- Displaying the post author and the post creation date -->
+                        <!-- Renamed date_created to dateCreated to match camelCase naming convention -->
+                        <p>Posted by {{post.user.username}} on {{format_date post.dateCreated}}</p>
+                    </div>
+                </div>
+            </a>
+        </section>
+    {{/each}}
+</div>

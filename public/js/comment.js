@@ -1,39 +1,27 @@
-// Async function to handle comment form submission
-async function commentFormHandler(event) {
-    // Prevent default form submission behavior
+// This function handles the comment form submission
+const handleCommentFormSubmit = async (event) => {
     event.preventDefault();
 
-    // Get comment text from the textarea
-    const comment_text = document.querySelector('textarea[name="comment-body"]').value.trim();
+    // Get the comment text from the form
+    const commentText = document.querySelector('#comment-input').value.trim();
 
-    // Get the post ID from the current URL
-    const urlParts = window.location.toString().split('/');
-    const post_id = urlParts[urlParts.length - 1];
+    // Get the post ID from the form's data attribute
+    const postId = document.querySelector('.comment-form').dataset.postId; // Changed to camelCase
+  
+    if (commentText) { // If there's a comment to post...
+      
+      // Send a POST request to the server
+      await fetch('/api/comments', {
+        method: 'POST',
+        body: JSON.stringify({ commentText, postId }), // Changed to camelCase
+        headers: { 'Content-Type': 'application/json' },
+      });
 
-    // Check if the comment text is not empty
-    if (comment_text) {
-        // Send a POST request to create a new comment
-        const response = await fetch('/api/comments', {
-            method: 'POST',
-            body: JSON.stringify({
-                post_id,
-                comment_text
-            }),
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        });
-
-        // Check if the response is successful
-        if (response.ok) {
-            // Reload the page to show the new comment
-            document.location.reload();
-        } else {
-            // Alert the user with the response status text
-            alert(response.statusText);
-        }
+      // Reload the page to see the new comment
+      document.location.reload();
     }
-}
+};
 
-// Add a submit event listener to the comment form
-document.querySelector('.comment-form').addEventListener('submit', commentFormHandler);
+// Attach the submit event listener to the comment form
+document.querySelector('.comment-form').addEventListener('submit', handleCommentFormSubmit);
+

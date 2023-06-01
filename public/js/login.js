@@ -1,35 +1,30 @@
-// Async function to handle login form submission
-async function loginFormHandler(event) {
-    // Prevent default form submission behavior
-    event.preventDefault();
-  
-    // Retrieve and trim the input values for username and password
-    const username = document.querySelector('#username-login').value.trim();
-    const password = document.querySelector('#password-login').value.trim();
-  
-    // Check if both username and password are provided
-    if (username && password) {
-      // Make a POST request to the server to authenticate user
-      const response = await fetch('/api/users/login', {
-        method: 'post',
-        body: JSON.stringify({
-          username,
-          password,
-        }),
-        headers: { 'Content-Type': 'application/json' },
-      });
-  
-      // Check if the response is successful
-      if (response.ok) {
-        // Redirect to the dashboard
-        document.location.replace('/dashboard/');
-      } else {
-        // Show an error alert with the response status text
-        alert(response.statusText);
-      }
+// Function handling user login
+const handleUserLogin = async (event) => {
+  // Preventing the default form submission behavior
+  event.preventDefault();
+
+  // Fetching input values and trimming unnecessary whitespaces
+  const username = document.querySelector('#username-login').value.trim();
+  const password = document.querySelector('#password-login').value.trim();
+
+  // If both username and password fields are filled
+  if (username && password) {
+    // Send a POST request to the server
+    const response = await fetch('/api/users/login', {
+      method: 'POST',
+      body: JSON.stringify({ username, password }),
+      headers: { 'Content-Type': 'application/json' },
+    });
+
+    // If the server response is OK (HTTP 200 status), redirect to the dashboard
+    if (response.ok) {
+      document.location.replace('/dashboard');
+    } else {
+      // If the server response is not OK, alert the user
+      alert('Your username or password is incorrect. Please try again.');
     }
   }
-  
-  // Add an event listener to the login form for the submit event
-  document.querySelector('.login-form').addEventListener('submit', loginFormHandler);
-  
+};
+
+// Add an event listener to the login form
+document.querySelector('.login-form').addEventListener('submit', handleUserLogin);

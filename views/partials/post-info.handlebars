@@ -1,15 +1,25 @@
-<!-- Post Article -->
-<article class="post">
-  <!-- Post Title -->
-  <div class="title">
-    <a href="/post/{{id}}" target="_blank">{{title}}</a>
-  </div>
-  <!-- Post Author and Date -->
-  <div class="meta">
-    Posted by {{user.username}} on {{format_date created_at}}
-  </div>
-  <!-- Post Content -->
-  <div class="content">
-    <p>{{ blog_post }}</p>
-  </div>
-</article>
+<!-- Loop through all posts -->
+{{#each posts as |post|}}
+    <!-- Each post is displayed within a card -->
+    <section class="card post-display" data-postId={{post.id}}> 
+        <!-- Post title is a clickable link that leads to the post details page -->
+        <a href="/posts/{{post.id}}">
+            <div class="level">
+                <div class="level-left">
+                    <header>{{post.title}}</header> 
+                <div class="level-right">
+                    <p>Posted on {{format_date post.dateCreated}}</p> 
+                </div>
+            </div>
+        </a>
+        <div class="ml-2">
+            <!-- Button to delete post -->
+            <button class="button is-info is-small" type="submit" id="delete-button-{{post.id}}">Remove Post</button> 
+            <!-- Button to edit post -->
+            <a href="/edit/{{post.id}}" class="button is-info is-small" id="edit-button">Modify Post</a> 
+        </div>
+    </section>
+{{/each}}
+
+<!-- Link to the JavaScript file handling delete operation -->
+<script src="/js/delete.js"></script>

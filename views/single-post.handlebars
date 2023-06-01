@@ -1,26 +1,46 @@
-<!-- Include post-info partial -->
-{{> post-info post}}
-
-<!-- Displaying form and comments -->
-<!-- Only display the comment form if the user is logged in -->
-{{#if loggedIn}}
-  <!-- Add Comment Form -->
-  <form class="comment-form">
-    <div>
-      <label for="comment-body">Add a comment:</label>
-      <textarea id="comment-body" name="comment-body" required></textarea>
+<!-- Main Post Section -->
+<section class="box p-5">
+    <!-- Post Header -->
+    <div class="level">
+        <div class="level-left has-background-info-light">
+            <h2 class="is-size-3 has-text-weight-medium">{{ title }}</h2>
+        </div>
+        <div class="level-right">
+            <p class="is-italic">Posted by {{ user.username }} on {{ format_date dateCreated }}</p> 
+        </div>
     </div>
 
-    <div>
-      <button type="submit">Add Comment</button>
+    <!-- Post Description -->
+    <p class="post-description">{{ description }}</p>
+</section>
+
+<!-- Comments Section -->
+<section class="box mt-5">
+    <h4 class="is-size-4">Discussion:</h4> 
+        {{#each comments as |comment|}}
+        <section class="card comment-section p-3">
+            <div class="level">
+                <!-- Comment Text -->
+                <div class="level-left">
+                    <h4>{{ comment.commentText }}</h4> 
+                </div>
+                <!-- Comment Metadata -->
+                <div class="level-right">
+                    <p class="is-italic">Commented by {{ comment.user.username }} on {{ format_date comment.dateCreated }}</p> 
+                </div>
+            </div>
+        </section>
+        {{/each}}
+
+        <!-- Comment Form -->
+        <section class="card">
+            <form class="comment-form" data-postId={{ id }}> 
+                <input class="input is-normal" type="text" id="comment-input" placeholder="Join the discussion..."/> 
+                <button class="button is-info is-small m-2" type="submit" id="comment-btn">Submit</button> 
+            </form>
+        </section>
     </div>
-  </form>
-{{/if}}
+</section>
 
-<!-- Include comments partial -->
-{{> comments post.comments}}
-
-<!-- Only include the comment JavaScript if the user is logged in -->
-{{#if loggedIn}}
-  <script src="/js/comment.js"></script>
-{{/if}}
+<!-- Include Comment Script -->
+<script src="/js/comment.js"></script>

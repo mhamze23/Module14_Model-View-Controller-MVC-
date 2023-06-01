@@ -1,25 +1,21 @@
-// Function to handle logout
-async function logout() {
-    try {
-      // Send a POST request to the logout API
-      const response = await fetch('/api/users/logout', {
-        method: 'post',
-        headers: { 'Content-Type': 'application/json' }
-      });
-  
-      // If the response is successful, redirect to the home page
-      if (response.ok) {
-        document.location.replace('/');
-      } else {
-        // If the response is not successful, show an alert with the status text
-        alert(response.statusText);
-      }
-    } catch (error) {
-      // If an error occurs, show an alert with the error message
-      alert(error.message);
-    }
+// Function for user logout process
+const userLogout = async () => {
+
+  // Send POST request to the server to end user's session
+  const response = await fetch('/api/users/logout', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+  });
+
+  // Check the response status
+  if (response.ok) {
+    // If response is OK, redirect user to the login page
+    document.location.replace('/login');
+  } else {
+    // If there was an error, alert the user
+    alert(response.statusText);
   }
-  
-  // Attach the logout function to the click event of the 'logout' button
-  document.querySelector('#logout').addEventListener('click', logout);
-  
+};
+
+// Event listener for the logout button
+document.querySelector('#logoutButton').addEventListener('click', userLogout); // changed to camelCase

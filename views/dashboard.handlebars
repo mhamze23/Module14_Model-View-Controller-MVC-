@@ -1,44 +1,35 @@
-<!-- Check if there are any posts -->
-{{#if posts.length}}
-  <!-- User Blogs Section -->
-  <section>
-    <h2>Your Posts</h2>
-    <ol>
-      {{#each posts as |post|}}
-        <li>
-          <article class="post">
-            <!-- Post title and link -->
-            <div class="title">
-              <a href="/post/{{post.id}}">{{post.title}}</a>
-            </div>
-            <!-- Post metadata -->
-            <div class="meta">
-              <strong>Posted by {{post.user.username}} on {{format_date post.created_at}}</strong>
-            </div>
-          </article>
-          <!-- Edit Post Link -->
-          <a href="/dashboard/edit/{{post.id}}" class="edit-link">Edit post</a>
-        </li>
-      {{/each}}
-    </ol>
-  </section>
-{{/if}}
+<div>
+    <!-- Dashboard welcome message -->
+    <h4 class="is-size-2 has-background-info-light">Welcome to {{username}}'s Dashboard!</h4>
 
-<!-- Create New Blog Section -->
-<section>
-  <h2>Create New Blog</h2>
-  <form class="new-post-form">
-    <div>
-      <label for="post-title">Title</label>
-      <input type="text" id="post-title" name="post-title" required />
-    </div>
-    <div>
-      <label for="blog_post">Blog</label>
-      <textarea class="" id="blog_post" name="blog_post" required></textarea>
-    </div>
-    <button type="submit" class="btn">Create</button>
-  </form>
-</section>
+    <!-- Section for creating a new blog post -->
+    <div class="createBlog"> <!-- changed to camelCase -->
+        <h3 class="is-size-4">Create a New Blog Post:</h3>
 
-<!-- JavaScript for Adding Post -->
-<script src="/js/add-post.js"></script>
+        <form>
+            <!-- Field for entering the title of the post -->
+            <div class="field">
+                <input class="input" type="text" name="newPostTitle" placeholder="Title" /> <!-- changed to camelCase -->
+            </div>
+            
+            <!-- Field for entering the content of the post -->
+            <div class="field">
+                <textarea class="textarea is-normal" name="newPostDescription" placeholder="Your content here"></textarea> <!-- changed to camelCase -->
+            </div>
+
+            <!-- Submit button for the form -->
+            <div class="field">
+                <button type="submit" id="createBtn" class="button is-info">Create</button> <!-- changed to camelCase -->
+            </div>
+        </form>
+    </div>
+
+    <!-- Conditionally render the posts details -->
+    {{#if posts.length}}
+        <h4 class="is-size-4 m-2">All Posts:</h4>
+        {{> postDetails}} <!-- changed to camelCase -->
+    {{/if}}
+</div>
+
+<!-- Link to the JavaScript file for create functionality -->
+<script src="/js/create.js"></script>

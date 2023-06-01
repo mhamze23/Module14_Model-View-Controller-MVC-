@@ -1,24 +1,35 @@
-<!-- Login Form -->
-<form class="login-form">
-  <div>
-    <!-- Email Input -->
-    <label for="email-login">Email:</label>
-    <input type="email" id="email-login" name="email" required />
-  </div>
-  <div>
-    <!-- Password Input -->
-    <label for="password-login">Password:</label>
-    <input type="password" id="password-login" name="password" required />
-  </div>
-  <div>
-    <!-- Login Button -->
-    <button type="submit">Login</button>
-  </div>
-  <!-- Sign Up Link -->
-  <div class="sign-up">
-    Not a member? <a href="/signup">Sign Up Here!</a>
-  </div>
-</form>
+<!-- Beginning of container div -->
+<div>
+    <!-- Login section -->
+    <section class="box">
+        <h2 class="is-size-3">Login</h2>
 
-<!-- JavaScript for Login -->
+        <!-- Login form -->
+        <form class="login-form">
+
+            <!-- Username input field -->
+            <div class="control">
+                <label for="usernameLogin">Username:</label> <!-- changed id to camelCase -->
+                <input class="input" type="text" id="usernameLogin" placeholder="Enter username" /> <!-- changed id to camelCase and placeholder text -->
+            </div>
+
+            <!-- Password input field -->
+            <div class="control">
+                <label for="passwordLogin">Password:</label> <!-- changed id to camelCase -->
+                <input class="input" type="password" id="passwordLogin" placeholder="Enter password" /> <!-- changed id to camelCase and placeholder text -->
+            </div>
+
+            <!-- Login button -->
+            <div class="control">
+                <button class="button is-info" type="submit" id="loginButton">Login</button> <!-- changed id to camelCase -->
+            </div>
+
+        </form>
+
+        <!-- Signup link -->
+        <a href="/signup">Don't have an account? Sign up!</a>
+    </section>
+</div>
+
+<!-- Link to login script -->
 <script src="/js/login.js"></script>

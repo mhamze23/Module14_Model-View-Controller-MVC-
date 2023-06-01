@@ -1,32 +1,35 @@
-const sequelize = require('../config/connection');
-const { User, Post } = require('../models');
+const { User } = require('../models');
+const bcrypt = require('bcrypt');
 
-// Sample user data
-const userdata = [
+// Seed user data
+const userData = [  
   {
-    username: 'john_doe',
+    username: 'johnDoe',  
     email: 'john.doe@example.com',
     password: 'p@ssw0rd123'
   },
   {
-    username: 'jane_smith',
+    username: 'janeSmith',  
     email: 'jane.smith@example.com',
     password: 's3cur3P@ss!'
   },
   {
-    username: 'alice_wonder',
+    username: 'aliceWonder',  
     email: 'alice.wonder@example.com',
     password: 'aL1c3w0nd3r'
   },
   {
-    username: 'bob_marley',
+    username: 'bobMarley',  
     email: 'bob.marley@example.com',
     password: 'b0bm@rley'
   },
 ];
 
-// Function to seed users in the database
-const seedUsers = () => User.bulkCreate(userdata, { individualHooks: true });
+// Seed users into the database
+const seedUsers = () => {
+  // use bulkCreate to insert multiple entries at once
+  // individualHooks: true ensures that beforeCreate hook is run before adding to the database
+  return User.bulkCreate(userData, { individualHooks: true });
+};
 
-// Export the seedUsers function
 module.exports = seedUsers;

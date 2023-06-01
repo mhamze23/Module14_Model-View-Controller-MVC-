@@ -1,33 +1,27 @@
-// Edit Post form handler
-async function editFormHandler(event) {
-    // Prevent default form submission behavior
-    event.preventDefault();
-  
-    // Get the post title, content, and ID
-    const title = document.querySelector('input[name="post-title"]').value.trim();
-    const blog_content = document.querySelector('input[name="blog_post"]').value;
-    const id = window.location.pathname.split('/').pop();
-  
-    // Send a PUT request to update the post
-    const response = await fetch(`/api/posts/${id}`, {
-      method: 'PUT',
-      body: JSON.stringify({
-        title,
-        blog_content
-      }),
-      headers: {
-        'Content-Type': 'application/json'
+// Define the event handler function for editing posts
+const editPostFormHandler = async (event) => {
+  event.preventDefault();
+
+  // Extract post id and description from the form
+  const postId = document.querySelector('.edit-post-section').dataset.postId; // changed to camelCase
+  const description = document.querySelector('textarea[name="editPostDescription"]').value.trim(); // changed to camelCase
+
+  if (description) {
+      // Make a PUT request to the API endpoint for editing posts
+      const response = await fetch(`/api/posts/${postId}`, { // changed to camelCase
+          method: 'PUT',
+          body: JSON.stringify({description}),
+          headers: { 'Content-Type': 'application/json' },
+      });
+
+      if (response.ok) {
+          // If the request was successful, redirect to the dashboard
+          document.location.replace('/dashboard');
+      } else {
+          alert('Something went wrong. Please try again!');
       }
-    });
-  
-    // Check if the response is OK and redirect to the dashboard, else show an alert
-    if (response.ok) {
-      document.location.replace('/dashboard/');
-    } else {
-      alert(response.statusText);
-    }
   }
-  
-  // Add the event listener to the edit post form
-  document.querySelector('.edit-post-form').addEventListener('submit', editFormHandler);
-  
+};
+
+// Attach the event listener to the form submission
+document.querySelector('.edit-post').addEventListener('submit', editPostFormHandler);
